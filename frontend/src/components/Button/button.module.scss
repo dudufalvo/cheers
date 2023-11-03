@@ -1,0 +1,129 @@
+@import '../../styles/mixins.scss';
+
+.button {
+  @include flex($justify: center, $align: center, $gap: 0.5rem);
+  @include container($orange, 1px solid, $smallRadius, $orange, 0.85rem 1.5rem);
+  @include text($montserrat, 1rem, 1.25rem, 500, $white);
+  cursor: pointer;
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &:disabled {
+    border-color: $disabledOrange;
+    pointer-events: none;
+  }
+
+  &.filled {
+
+    &:hover,
+    &:active,
+    &.active {
+      box-shadow: 0px 2px 4px 0px rgba(34, 34, 34, 0.25);
+    }
+
+    &:disabled {
+      background-color: $disabledOrange;
+    }
+
+    &:active,
+    &.active {
+      background-color: $darkOrange;
+      border-color: $darkOrange;
+    }
+  }
+
+  &.outlined {
+    background-color: $mainWhite;
+    color: $orange;
+
+    &:hover {
+      background-color: $hoverOrange;
+    }
+
+    &:active,
+    &.active {
+      background-color: $orange;
+      border-color: $white;
+      color: $white;
+    }
+
+    &:disabled {
+      background-color: $mainWhite;
+      color: $disabledOrange;
+    }
+  }
+
+  &.google {
+    background-color: $white;
+    color: $darkGray;
+    font-weight: 500;
+
+    &:hover {
+      background-color: $hoverOrange;
+    }
+  }
+
+  &.iconOutlined {
+    padding: 0.85rem;
+    background-color: $white;
+    color: $orange;
+
+    svg {
+      @include size(1.15rem, auto);
+    }
+
+    &:hover {
+      background-color: $hoverOrange;
+    }
+
+    &:active,
+    &.active {
+      background-color: $orange;
+      border-color: $white;
+      color: $white;
+    }
+
+    &:disabled {
+      background-color: $mainWhite;
+      color: $disabledOrange;
+    }
+  }
+
+  &.iconFilled {
+    padding: 0.75rem;
+
+    svg {
+      @include size(1.15rem, auto);
+    }
+
+    &:hover,
+    &:active,
+    &.active {
+      box-shadow: 0px 2px 4px 0px rgba(34, 34, 34, 0.25);
+    }
+
+    &:disabled {
+      background-color: $disabledOrange;
+    }
+
+    &:active,
+    &.active {
+      background-color: $darkOrange;
+      border-color: $darkOrange;
+    }
+
+  }
+
+  &.onlyIcon {
+    padding: 0;
+    background-color: transparent;
+    color: $orange;
+    border: none;
+
+    svg {
+      @include size(2rem);
+    }
+  }
+}
