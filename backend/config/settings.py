@@ -31,6 +31,10 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1'] # this is the host that Do
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig', # this is the app we created
+    'rest_framework', # this will be installed later
+    'django_filters', # this will be installed later
+    'corsheaders', # this will be installed later
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

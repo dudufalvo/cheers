@@ -1,0 +1,27 @@
+@import '../../styles/mixins.scss';
+
+.card {
+  @include flex($direction: column, $justify: center, $align: center, $gap: 1rem);
+  @include size(100%, auto);
+  padding: 1rem;
+
+  img {
+    @include size(15rem, 15rem);
+    border-radius: 0.5rem;
+    object-fit: cover
+  }
+
+  h1 {
+    @include text($raleway, 1.5rem, 1.25rem, 700, $black);
+    text-align: center;
+  }
+
+  div {
+    @include flex($direction: column, $justify: center, $align: center, $gap: 0.5rem);
+
+    span {
+      @include text($raleway, 1.25rem, 1rem, 700, $orange);
+      text-align: center;
+    }
+  }
+}

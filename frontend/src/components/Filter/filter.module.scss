@@ -1,0 +1,24 @@
+@import '../../styles/mixins.scss';
+
+.filter {
+  @include flex(column, center, center, 0.5rem);
+  cursor: pointer;
+
+  div {
+    @include flex($justify: center, $align: center, $gap: 0.5rem);
+    cursor: pointer;
+
+    img {
+      @include size(3rem, 3rem);
+    }
+
+    img:hover {
+      background-color: $lightGray;
+      border-radius: 50%;
+    }
+  }
+
+  span {
+    @include text($size: 1rem, $weight: 600);
+  }
+}

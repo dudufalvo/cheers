@@ -1,21 +1,24 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { BiChevronDown } from 'react-icons/bi'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useUser } from 'src/contexts/userContext'
+import toast from 'src/utils/toast'
 
-import logo from '../../assets/burger.svg'
-import logoTextWhite from '../../assets/logo-text-white.svg'
-import logoText from '../../assets/logo-text.svg'
+//import logoText from '../../assets/logo-text.png'
+import logo from '../../assets/logoImage.png'
 
 import styles from './navbar.module.scss'
 
-import toast from 'utils/toast'
+import Tag from 'components/Tag'
+
+const default_image = 'https://avatars.githubusercontent.com/u/45668209?v=4'
+
+const width = '4.5rem'
+const height = '3.5rem'
 
 export const Navbar = () => {
   const navigate = useNavigate()
-  const [active, setActive] = useState(false)
-  const path = useLocation().pathname
   const { user } = useUser()
 
   const handleLogout = () => {
@@ -29,58 +32,39 @@ export const Navbar = () => {
   }
 
   return (
-    <>
-      <nav className={styles.navbar}>
-        <a href='/' className={styles.logo}>
-          <img src={logo} alt="logo" />
-          <img src={logoText} alt="logo" />
-        </a>
-        <div className={styles.links}>
-          <a href='/groups' className={path.includes('group') ? styles.activeLink : ''}>Groups</a>
-          <a href='/locations' className={path.includes('location') ? styles.activeLink : ''}>Locations</a>
-          <div className={styles.dropdown}>
-            <a className={styles.dropdownText} href='/account?tab=settings'>
-              <img src={user?.image_url} alt="picture" className={styles.profilePicture} />
-              <span className={styles.name}>{user?.name}</span>
-              <BiChevronDown />
-            </a>
+    <nav className={styles.navbar}>
+      <a href='/' className={styles.logo}>
+        <img style={{ width, height }} src={logo} alt="logo" />
+        <span>CHEERS</span>
+      </a>
+      <div className={styles.links}>
+        <Tag>
+          <div className={styles.cart}>
+            <AiOutlineShoppingCart />
+            <span>Cart</span>
+            <span className={styles.cartCount}>{1}</span>
+          </div>
+        </Tag>
 
+        <div className={styles.dropdown}>
+          <a className={styles.dropdownText}>
+            <img src={user.image_url || default_image} alt="picture" className={styles.profilePicture} />
+            <span className={styles.name}>{user.name}</span>
+            {user.email && <BiChevronDown />}
+          </a>
+
+          {user.email &&
             <div className={styles.dropdownContent}>
-              <button onClick={() => navigate({ pathname: '/account', search: '?tab=settings' })}>Settings</button>
+              <button>Settings</button>
               <hr />
-              <button onClick={() => navigate({ pathname: '/account', search: '?tab=reviews' })}> Reviews</button>
+              <button> Reviews</button>
               <hr />
-              <button onClick={() => navigate({ pathname: '/account', search: '?tab=favorites' })}> Favorites</button>
+              <button> Favorites</button>
               <hr />
               <button onClick={handleLogout}>Logout</button>
-            </div>
-          </div>
-        </div >
-      </nav >
-      <nav className={`${styles.navbarMobile} ${active && styles.navbarMobileActive}`}>
-        <div className={styles.navbarTop}>
-          <a href='/' className={styles.logo}>
-            <img src={active ? logoTextWhite : logoText} alt="logo" />
-          </a>
-          <img
-            src={logo}
-            alt="burger"
-            className={styles.burger}
-            onClick={() => setActive(!active)}
-          />
+            </div>}
         </div>
-        {
-          active &&
-          <div className={styles.burgerMenu}>
-            <button onClick={() => navigate('/groups')} className={path.includes('group') ? styles.activeLink : ''}>Groups</button>
-            <button onClick={() => navigate('/locations')} className={path.includes('location') ? styles.activeLink : ''}>Locations</button>
-            <button onClick={() => navigate({ pathname: '/account', search: '?tab=settings' })} className={styles.profile}>
-              <img src={user?.image_url} alt="picture" className={styles.profilePicture} />
-              <span className={styles.name}>{user?.name}</span>
-            </button>
-          </div>
-        }
-      </nav>
-    </>
+      </div>
+    </nav>
   )
 }

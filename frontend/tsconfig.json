@@ -32,7 +32,25 @@
       ],
       "assets/*": [
         "src/assets/*"
-      ]
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "hooks/*": [
+        "src/hooks/*"
+      ],
+      "types/*": [
+        "src/types/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+      "contexts/*": [
+        "src/contexts/*"
+      ],
+      "api/*": [
+        "src/api/*"
+      ],
     }
   },
   "references": [
